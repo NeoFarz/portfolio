@@ -1,7 +1,14 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
 
-// https://astro.build/config
 export default defineConfig({
-    site: 'https://NeoFarz.github.io',
+  site: 'https://neofarz.github.io',
+  base: '/',
+  integrations: [tailwind()],
+  output: 'static',
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark',
+    },
+  },
 });

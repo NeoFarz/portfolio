@@ -1,30 +1,139 @@
-# Astro Starter Kit: Portfolio
+# Farzad Fatollahi-Fard Portfolio
 
-```sh
-npm create astro@latest -- --template portfolio
+A modern portfolio website built with Astro and DaisyUI.
+
+## Features
+
+- **Astro** - Static site generation with excellent performance
+- **DaisyUI + Tailwind CSS** - Beautiful, customizable components
+- **Markdown Projects** - Easy content management for project pages
+- **Dark/Light Theme** - Automatic theme switching with manual toggle
+- **Responsive Design** - Mobile-first approach
+- **GitHub Pages Deployment** - Automated CI/CD workflow
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/portfolio/devcontainer.json)
+## Project Structure
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+```
+/
+├── public/
+│   └── favicon.svg
+├── src/
+│   ├── components/
+│   │   ├── Footer.astro
+│   │   ├── Navbar.astro
+│   │   └── ProjectCard.astro
+│   ├── content/
+│   │   ├── config.ts
+│   │   └── projects/
+│   │       ├── opensoc-fabric.md
+│   │       ├── architecture-simulation.md
+│   │       └── fpga-accelerators.md
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── resume.astro
+│   │   └── projects/
+│   │       ├── index.astro
+│   │       └── [slug].astro
+│   └── styles/
+│       └── global.css
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── astro.config.mjs
+├── tailwind.config.mjs
+└── package.json
+```
 
-![portfolio](https://user-images.githubusercontent.com/357379/210779178-a98f0fb7-6b1a-4068-894c-8e1403e26654.jpg)
+## Adding Projects
 
-## 🧞 Commands
+Create a new `.md` file in `src/content/projects/`:
 
-All commands are run from the root of the project, from a terminal:
+```markdown
+---
+title: "Project Title"
+summary: "Brief description for the projects listing page."
+tags: ["Tag1", "Tag2", "Tag3"]
+featured: true
+order: 100
+github: "https://github.com/username/repo"
+demo: "https://demo.example.com"
+date: "2024"
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Full markdown content for the project page...
+```
 
-## 👀 Want to learn more?
+### Frontmatter Options
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | ✓ | Project title |
+| `summary` | string | ✓ | Short description for cards |
+| `tags` | string[] | | Technology/topic tags |
+| `featured` | boolean | | Highlight on homepage |
+| `order` | number | | Sort priority (higher = first) |
+| `github` | string | | GitHub repository URL |
+| `demo` | string | | Live demo URL |
+| `date` | string | | Project date/timeframe |
+
+## Customization
+
+### Themes
+
+The site includes two DaisyUI themes:
+- `circuit` (dark) - Primary theme with green/cyan accents
+- `daylight` (light) - Clean light theme with blue accents
+
+Modify themes in `tailwind.config.mjs`.
+
+### Fonts
+
+- **Display/Headings**: JetBrains Mono
+- **Body**: Source Sans 3
+
+Update in `src/styles/global.css` and `tailwind.config.mjs`.
+
+## Deployment
+
+The site automatically deploys to GitHub Pages when you push to the `main` branch.
+
+### Setup GitHub Pages
+
+1. Go to repository **Settings** > **Pages**
+2. Under **Source**, select **GitHub Actions**
+3. Push to `main` branch to trigger deployment
+
+### Custom Domain
+
+1. Add your domain in repository **Settings** > **Pages**
+2. Create a `CNAME` file in `public/` with your domain
+3. Update `site` in `astro.config.mjs`
+
+## License
+
+MIT

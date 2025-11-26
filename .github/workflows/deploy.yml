@@ -2,43 +2,104 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
+  # Optional: rebuild when CV repo updates (requires webhook setup)
+  repository_dispatch:
+    types: [cv-updated]
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+env:
+  BUILD_PATH: "."
+  # Set to 'true' to enable LaTeX CV compilation
+  BUILD_CV: 'false'
+  # UPDATE THIS: Your LaTeX CV repository
+  CV_REPO: "neofarz/cv"
+  # UPDATE THIS: Path to main .tex file in the CV repo
+  CV_TEX_FILE: "cv.tex"
+  # Output filename for the compiled PDF
+  CV_OUTPUT: "cv.pdf"
+
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout portfolio
         uses: actions/checkout@v4
-      
+
+      - name: Checkout CV repository
+        if: env.BUILD_CV == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.CV_REPO }}
+          path: cv-source
+          # If your CV repo is private, add a token:
+          # token: ${{ secrets.CV_REPO_TOKEN }}
+
+      - name: Compile LaTeX CV
+        if: env.BUILD_CV == 'true'
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: cv-source
+          root_file: ${{ env.CV_TEX_FILE }}
+          # Use latexmk for reliable compilation
+          latexmk_use_lualatex: true
+          latexmk_use_xelatex: false
+          # Add extra arguments if needed
+          # args: "-pdf -interaction=nonstopmode -shell-escape"
+          args: "-pdf -interaction=nonstopmode -shell-escape"
+
+      - name: Copy CV PDF to public folder
+        if: env.BUILD_CV == 'true'
+        run: |
+          cp cv-source/*.pdf public/${{ env.CV_OUTPUT }}
+          echo "CV compiled and copied to public/${{ env.CV_OUTPUT }}"
+          ls -la public/
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-      
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: ${{ env.BUILD_PATH }}/package-lock.json
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         run: npm ci
-      
-      - name: Build
-        run: npm run build
-      
+        working-directory: ${{ env.BUILD_PATH }}
+
+      - name: Build with Astro
+        run: |
+          npm run build \
+            -- \
+            --site "${{ steps.pages.outputs.origin }}" \
+            --base "${{ steps.pages.outputs.base_path }}"
+        working-directory: ${{ env.BUILD_PATH }}
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ${{ env.BUILD_PATH }}/dist
 
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

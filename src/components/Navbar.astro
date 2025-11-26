@@ -1,0 +1,114 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Projects', path: '/projects/' },
+  { name: 'CV', path: '/cv/' },
+];
+
+function isActive(path: string): boolean {
+  if (path === '/') {
+    return currentPath === '/' || currentPath === '';
+  }
+  return currentPath.startsWith(path);
+}
+---
+
+<nav class="navbar bg-base-200/80 backdrop-blur-md sticky top-0 z-50 border-b border-primary/10">
+  <div class="container mx-auto max-w-5xl px-4">
+    <div class="flex-1">
+      <a href="/" class="text-xl font-display font-bold text-gradient hover:opacity-80 transition-opacity">
+        <span class="text-primary">&lt;</span>FF<span class="text-primary">/&gt;</span>
+      </a>
+    </div>
+    
+    <!-- Desktop menu -->
+    <div class="hidden md:flex flex-none gap-2">
+      {navItems.map((item) => (
+        <a 
+          href={item.path}
+          class:list={[
+            'btn btn-ghost font-display text-sm',
+            isActive(item.path) ? 'text-primary bg-primary/10' : 'text-base-content/70 hover:text-primary'
+          ]}
+        >
+          {item.name}
+        </a>
+      ))}
+      
+      <button 
+        id="theme-toggle" 
+        class="btn btn-ghost btn-circle"
+        aria-label="Toggle theme"
+      >
+        <svg id="sun-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile menu -->
+    <div class="flex md:hidden">
+      <button 
+        id="theme-toggle-mobile" 
+        class="btn btn-ghost btn-circle btn-sm mr-2"
+        aria-label="Toggle theme"
+      >
+        <svg class="w-5 h-5 sun-icon-mobile" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <svg class="w-5 h-5 hidden moon-icon-mobile" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+      
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-ghost btn-circle">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </label>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-200 rounded-box w-52 border border-primary/20">
+          {navItems.map((item) => (
+            <li>
+              <a 
+                href={item.path}
+                class:list={[
+                  'font-display',
+                  isActive(item.path) ? 'text-primary bg-primary/10' : ''
+                ]}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.getElementById('theme-toggle-mobile');
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'circuit' ? 'daylight' : 'circuit';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update both desktop and mobile icons
+        const sunIcons = document.querySelectorAll('#sun-icon, .sun-icon-mobile');
+        const moonIcons = document.querySelectorAll('#moon-icon, .moon-icon-mobile');
+        
+        sunIcons.forEach(icon => icon.classList.toggle('hidden', newTheme === 'daylight'));
+        moonIcons.forEach(icon => icon.classList.toggle('hidden', newTheme === 'circuit'));
+      });
+    }
+  });
+</script>

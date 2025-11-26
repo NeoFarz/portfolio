@@ -1,249 +1,139 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
-// Component Imports
-import CallToAction from '../components/CallToAction.astro';
-// Page section components
-import ContactCTA from '../components/ContactCTA.astro';
-import Grid from '../components/Grid.astro';
-import Hero from '../components/Hero.astro';
-import Icon from '../components/Icon.astro';
-import Pill from '../components/Pill.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
-import Skills from '../components/Skills.astro';
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
-import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Content Fetching: List four most recent work projects
-const projects = (await getCollection('work'))
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+const projects = await getCollection('projects');
+const featuredProjects = projects.filter(p => p.data.featured).slice(0, 3);
+const recentProjects = projects
+  .sort((a, b) => (b.data.order || 0) - (a.data.order || 0))
+  .slice(0, 4);
 ---
 
-<BaseLayout>
-	<div class="stack gap-20 lg:gap-48">
-		<div class="wrapper stack gap-8 lg:gap-20">
-			<header class="hero">
-				<Hero
-					title="Hello, my name is Farzad Fatollahi-Fard"
-					tagline="I am a Hardware Developer who is currently based in San Francisco, California."
-					align="start"
-				>
-					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-						<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
-					</div>
-				</Hero>
-
-				<img
-					alt="Farzad Fatollahi-Fard smiling in a blue button up shirt"
-					width="480"
-					height="620"
-					src="/assets/portrait.jpg"
-				/>
-			</header>
-
-			<Skills />
-		</div>
-
-		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
-				</header>
-
-				<div class="gallery">
-					<Grid variant="offset">
-						{
-							projects.map((project) => (
-								<li>
-									<PortfolioPreview project={project} />
-								</li>
-							))
-						}
-					</Grid>
-				</div>
-
-				<div class="cta">
-					<CallToAction href="/work/">
-						View All
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
-				</div>
-			</section>
-
-			<section class="section with-background bg-variant">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Mentions</h3>
-					<p>
-						I have been fortunate enough to receive praise for my work in several publications. Take
-						a look below to learn more.
-					</p>
-				</header>
-
-				<div class="gallery">
-					<Grid variant="small">
-						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
-								<li class="mention-card">
-									<p>{brand}</p>
-								</li>
-							))
-						}
-					</Grid>
-				</div>
-			</section>
-		</main>
-
-		<ContactCTA />
-	</div>
-</BaseLayout>
-
-<style>
-	.hero {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 2rem;
-	}
-
-	.roles {
-		display: none;
-	}
-
-	.hero img {
-		aspect-ratio: 5 / 4;
-		object-fit: cover;
-		object-position: top;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
-
-	@media (min-width: 50em) {
-		.hero {
-			display: grid;
-			grid-template-columns: 6fr 4fr;
-			padding-inline: 2.5rem;
-			gap: 3.75rem;
-		}
-
-		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
-		}
-
-		.hero img {
-			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
-			object-fit: cover;
-		}
-	}
-
-	/* ====================================================== */
-
-	.section {
-		display: grid;
-		gap: 2rem;
-	}
-
-	.with-background {
-		position: relative;
-	}
-
-	.with-background::before {
-		--hero-bg: var(--bg-image-subtle-2);
-
-		content: '';
-		position: absolute;
-		pointer-events: none;
-		left: 50%;
-		width: 100vw;
-		aspect-ratio: calc(2.25 / var(--bg-scale));
-		top: 0;
-		transform: translateY(-75%) translateX(-50%);
-		background:
-			url('/assets/backgrounds/noise.png') top center/220px repeat,
-			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
-			var(--gray-999);
-		background-blend-mode: overlay, normal, normal, normal;
-		mix-blend-mode: var(--bg-blend-mode);
-		z-index: -1;
-	}
-
-	.with-background.bg-variant::before {
-		--hero-bg: var(--bg-image-subtle-1);
-	}
-
-	.section-header {
-		justify-self: center;
-		text-align: center;
-		max-width: 50ch;
-		font-size: var(--text-md);
-		color: var(--gray-300);
-	}
-
-	.section-header h3 {
-		font-size: var(--text-2xl);
-	}
-
-	@media (min-width: 50em) {
-		.section {
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
-			gap: 5rem;
-		}
-
-		.section.with-cta {
-			grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
-		}
-
-		.section-header {
-			grid-area: header;
-			font-size: var(--text-lg);
-		}
-
-		.section-header h3 {
-			font-size: var(--text-4xl);
-		}
-
-		.with-cta .section-header {
-			justify-self: flex-start;
-			text-align: left;
-		}
-
-		.gallery {
-			grid-area: gallery;
-		}
-
-		.cta {
-			grid-area: cta;
-		}
-	}
-
-	/* ====================================================== */
-
-	.mention-card {
-		display: flex;
-		height: 7rem;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
-	}
-
-	@media (min-width: 50em) {
-		.mention-card {
-			border-radius: 1.5rem;
-			height: 9.5rem;
-		}
-	}
-</style>
+<Layout title="Home">
+  <!-- Hero Section -->
+  <section class="py-12 md:py-20">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-3 h-3 rounded-full bg-primary animate-pulse"></div>
+        <span class="font-display text-sm text-primary/80">Available for collaboration</span>
+      </div>
+      
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
+        <span class="text-base-content">Hello, I'm</span>
+        <br />
+        <span class="text-gradient">Farzad Fatollahi-Fard</span>
+      </h1>
+      
+      <p class="text-lg md:text-xl text-base-content/80 mb-8 leading-relaxed">
+        <span class="text-primary font-display">FPGA Computer Systems Engineer</span> at 
+        <a href="https://www.lbl.gov" target="_blank" rel="noopener noreferrer" class="link-underline text-secondary">
+          Lawrence Berkeley National Lab
+        </a>. I specialize in hardware, firmware, and software for 
+        <span class="text-accent">high-performance computing</span> systems.
+      </p>
+      
+      <div class="flex flex-wrap gap-4">
+        <a href="/projects/" class="btn btn-primary font-display">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+          View Projects
+        </a>
+        <a href="/cv/" class="btn btn-outline btn-secondary font-display">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          CV
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section class="py-12 border-t border-primary/10">
+    <h2 class="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+      <span class="text-primary">//</span> About Me
+    </h2>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="space-y-4 text-base-content/80">
+        <p>
+          I hold a <strong class="text-base-content">Bachelor of Science in Electrical Engineering and Computer Science</strong> 
+          from the University of California, Berkeley. I chose to be an engineer because I enjoy thinking about 
+          problems on a larger scale and developing unique solutions.
+        </p>
+        <p>
+          At Lawrence Berkeley National Lab, I work on creative challenges across the hardware, firmware, and 
+          software domains in the HPC design space. The challenge of balancing these domains keeps me engaged 
+          in my work on a daily basis.
+        </p>
+      </div>
+      
+      <div class="space-y-4">
+        <h3 class="font-display text-lg font-semibold text-secondary">Core Expertise</h3>
+        <div class="flex flex-wrap gap-2">
+          {['FPGA Design', 'Computer Architecture', 'HPC Systems', 'Network-on-Chip', 'Verilog/SystemVerilog', 'Chisel/Scala', 'Python', 'C/C++'].map((skill) => (
+            <span class="badge badge-lg bg-base-300 border-primary/20">{skill}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Featured Projects -->
+  {recentProjects.length > 0 && (
+    <section class="py-12 border-t border-primary/10">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="font-display text-2xl font-bold flex items-center gap-3">
+          <span class="text-primary">//</span> Featured Projects
+        </h2>
+        <a href="/projects/" class="btn btn-ghost btn-sm font-display text-primary">
+          View All
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-4">
+        {recentProjects.map((project) => (
+          <ProjectCard 
+            title={project.data.title}
+            summary={project.data.summary}
+            slug={project.slug}
+            tags={project.data.tags}
+            featured={project.data.featured}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+  
+  <!-- Contact CTA -->
+  <section class="py-12 border-t border-primary/10">
+    <div class="card bg-gradient-to-br from-base-200 to-base-300 border border-primary/20">
+      <div class="card-body text-center py-12">
+        <h2 class="font-display text-2xl font-bold mb-4">Let's Connect</h2>
+        <p class="text-base-content/70 mb-6 max-w-md mx-auto">
+          Interested in collaborating on HPC systems, FPGA development, or computer architecture research? 
+          I'd love to hear from you.
+        </p>
+        <div class="flex justify-center gap-4 flex-wrap">
+          <a href="mailto:farzadfatollahifard@gmail.com" class="btn btn-primary font-display">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Send Email
+          </a>
+          <a href="tel:415-625-3935" class="btn btn-outline btn-secondary font-display">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            Call
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="CV" description="Curriculum Vitae of Farzad Fatollahi-Fard - FPGA Computer Systems Engineer.">
+  <article class="py-8">
+    <header class="mb-8 pb-8 border-b border-primary/10">
+      <h1 class="text-4xl font-display font-bold mb-4">
+        <span class="text-primary">//</span> Curriculum Vitae
+      </h1>
+      <p class="text-base-content/70">
+        FPGA Computer Systems Engineer specializing in hardware, firmware, and software for high-performance computing.
+      </p>
+      
+      <div class="flex gap-3 mt-6">
+        <a href="/cv.pdf" class="btn btn-primary font-display" download="Farzad_Fatollahi-Fard_CV.pdf">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          Download PDF
+        </a>
+        <a href="/cv.pdf" target="_blank" class="btn btn-outline btn-secondary font-display">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+          View PDF
+        </a>
+      </div>
+    </header>
+    
+    <div class="space-y-12">
+      <!-- Experience -->
+      <section>
+        <h2 class="text-2xl font-display font-bold text-secondary mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Experience
+        </h2>
+        
+        <div class="space-y-8">
+          <div class="card bg-base-200 border border-primary/10">
+            <div class="card-body">
+              <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+                <h3 class="font-display font-semibold text-lg text-primary">FPGA Computer Systems Engineer</h3>
+                <span class="badge badge-outline font-display text-xs">Present</span>
+              </div>
+              <p class="text-secondary font-medium mb-3">Lawrence Berkeley National Lab</p>
+              <ul class="space-y-2 text-base-content/80 text-sm">
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Lead development of OpenSoC Fabric, a parameterizable network-on-chip generator for HPC systems</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Design and implement domain-specific FPGA accelerators for scientific computing workloads</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Develop simulation infrastructure for computer architecture research</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Collaborate across hardware, firmware, and software domains in the HPC design space</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Education -->
+      <section>
+        <h2 class="text-2xl font-display font-bold text-secondary mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 7l-9-5v-2l9 5 9-5v2l-9 5z" />
+          </svg>
+          Education
+        </h2>
+        
+        <div class="card bg-base-200 border border-primary/10">
+          <div class="card-body">
+            <h3 class="font-display font-semibold text-lg text-primary">
+              Bachelor of Science, Electrical Engineering and Computer Science
+            </h3>
+            <p class="text-secondary font-medium">University of California, Berkeley</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Skills -->
+      <section>
+        <h2 class="text-2xl font-display font-bold text-secondary mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          </svg>
+          Technical Skills
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="card bg-base-200 border border-primary/10">
+            <div class="card-body">
+              <h3 class="font-display font-semibold text-accent mb-3">Hardware & FPGA</h3>
+              <div class="flex flex-wrap gap-2">
+                {['Verilog', 'SystemVerilog', 'Chisel/Scala', 'HLS', 'FPGA Design', 'RTL Development', 'Timing Analysis'].map((skill) => (
+                  <span class="badge bg-base-300 border-primary/20">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div class="card bg-base-200 border border-primary/10">
+            <div class="card-body">
+              <h3 class="font-display font-semibold text-accent mb-3">Software & Tools</h3>
+              <div class="flex flex-wrap gap-2">
+                {['Python', 'C/C++', 'Git', 'Linux', 'Simulation', 'Performance Analysis'].map((skill) => (
+                  <span class="badge bg-base-300 border-primary/20">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div class="card bg-base-200 border border-primary/10">
+            <div class="card-body">
+              <h3 class="font-display font-semibold text-accent mb-3">Architecture</h3>
+              <div class="flex flex-wrap gap-2">
+                {['Computer Architecture', 'Network-on-Chip', 'HPC Systems', 'Domain-Specific Accelerators', 'Memory Hierarchies'].map((skill) => (
+                  <span class="badge bg-base-300 border-primary/20">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div class="card bg-base-200 border border-primary/10">
+            <div class="card-body">
+              <h3 class="font-display font-semibold text-accent mb-3">Methodologies</h3>
+              <div class="flex flex-wrap gap-2">
+                {['Agile Development', 'Technical Leadership', 'Cross-functional Collaboration', 'Research & Publication'].map((skill) => (
+                  <span class="badge bg-base-300 border-primary/20">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Contact -->
+      <section>
+        <h2 class="text-2xl font-display font-bold text-secondary mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Contact
+        </h2>
+        
+        <div class="card bg-base-200 border border-primary/10">
+          <div class="card-body">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h3 class="font-display font-semibold text-accent mb-2">Email</h3>
+                <a href="mailto:farzadfatollahifard@gmail.com" class="text-base-content/80 hover:text-primary transition-colors">
+                  farzadfatollahifard@gmail.com
+                </a>
+              </div>
+              <div>
+                <h3 class="font-display font-semibold text-accent mb-2">Phone</h3>
+                <a href="tel:415-625-3935" class="text-base-content/80 hover:text-primary transition-colors">
+                  415-625-3935
+                </a>
+              </div>
+              <div class="md:col-span-2">
+                <h3 class="font-display font-semibold text-accent mb-2">Office</h3>
+                <address class="text-base-content/80 not-italic">
+                  Lawrence Berkeley National Lab<br />
+                  One Cyclotron Road 059-4028D<br />
+                  Berkeley, CA 94720
+                </address>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+</Layout>
