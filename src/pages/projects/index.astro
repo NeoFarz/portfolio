@@ -36,7 +36,7 @@ const otherProjects = sortedProjects.filter(p => !p.data.featured);
             <ProjectCard 
               title={project.data.title}
               summary={project.data.summary}
-              slug={project.slug}
+              slug={project.id}
               tags={project.data.tags}
               featured={true}
             />
@@ -55,7 +55,7 @@ const otherProjects = sortedProjects.filter(p => !p.data.featured);
             <ProjectCard 
               title={project.data.title}
               summary={project.data.summary}
-              slug={project.slug}
+              slug={project.id}
               tags={project.data.tags}
             />
           ))}
