@@ -39,14 +39,15 @@ import Layout from '../layouts/Layout.astro';
           Experience
         </h2>
         
-        <div class="space-y-8">
+        <div class="space-y-6">
+          <!-- LBNL -->
           <div class="card bg-base-200 border border-primary/10">
             <div class="card-body">
               <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
                 <h3 class="font-display font-semibold text-lg text-primary">FPGA Computer Systems Engineer</h3>
-                <span class="badge badge-outline font-display text-xs">Present</span>
+                <span class="badge badge-outline font-display text-xs">2013 – Present</span>
               </div>
-              <p class="text-secondary font-medium mb-3">Lawrence Berkeley National Lab</p>
+              <p class="text-secondary font-medium mb-3">Lawrence Berkeley National Lab, Berkeley, CA</p>
               <ul class="space-y-2 text-base-content/80 text-sm">
                 <li class="flex items-start gap-2">
                   <span class="text-primary mt-1">▸</span>
@@ -60,9 +61,80 @@ import Layout from '../layouts/Layout.astro';
                   <span class="text-primary mt-1">▸</span>
                   <span>Develop simulation infrastructure for computer architecture research</span>
                 </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- BEEcube -->
+          <div class="card bg-base-200 border border-primary/10">
+            <div class="card-body">
+              <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+                <h3 class="font-display font-semibold text-lg text-primary">Hardware Engineer</h3>
+                <span class="badge badge-outline font-display text-xs">May 2010 – March 2013</span>
+              </div>
+              <p class="text-secondary font-medium mb-3">BEEcube, Inc., Fremont, CA</p>
+              <ul class="space-y-2 text-base-content/80 text-sm">
                 <li class="flex items-start gap-2">
                   <span class="text-primary mt-1">▸</span>
-                  <span>Collaborate across hardware, firmware, and software domains in the HPC design space</span>
+                  <span>Developed, maintained, and supported embedded controller and firmware for BEE4 and miniBEE4 FPGA platforms</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Designed miniBEE4 platform, leading schematic capture and managed first prototype run</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Designed daughter boards for BEE4 and miniBEE4, including multi-gigabit digital and analog boards</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- BWRC -->
+          <div class="card bg-base-200 border border-primary/10">
+            <div class="card-body">
+              <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+                <h3 class="font-display font-semibold text-lg text-primary">Junior Staff Engineer / Student Staff</h3>
+                <span class="badge badge-outline font-display text-xs">Aug 2008 – May 2010</span>
+              </div>
+              <p class="text-secondary font-medium mb-3">UC Berkeley, Berkeley Wireless Research Center (BWRC), Berkeley, CA</p>
+              <ul class="space-y-2 text-base-content/80 text-sm">
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Developed and maintained embedded controller for BEE3 FPGA platforms with remote login, development, and testing capabilities</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Designed expansion board with USB FIFO, UART over USB, and PCIe for FPGA communication</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Built and maintained FPGA build cluster and cloud computing cluster on Intel Atom platform</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- ESG -->
+          <div class="card bg-base-200 border border-primary/10">
+            <div class="card-body">
+              <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+                <h3 class="font-display font-semibold text-lg text-primary">Engineering Assistant</h3>
+                <span class="badge badge-outline font-display text-xs">Summer 2008 & 2009</span>
+              </div>
+              <p class="text-secondary font-medium mb-3">UC Berkeley, EECS Electronic Support Group (ESG), Berkeley, CA</p>
+              <ul class="space-y-2 text-base-content/80 text-sm">
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Developed lab material for introductory circuits courses using TI MSP430 Experimenter Platform</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Designed Bluetooth expansion board for microcontrollers and FPGAs</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-primary mt-1">▸</span>
+                  <span>Evaluated Xilinx and Altera platforms for EECS150 educational curriculum</span>
                 </li>
               </ul>
             </div>
@@ -81,10 +153,60 @@ import Layout from '../layouts/Layout.astro';
         
         <div class="card bg-base-200 border border-primary/10">
           <div class="card-body">
-            <h3 class="font-display font-semibold text-lg text-primary">
-              Bachelor of Science, Electrical Engineering and Computer Science
-            </h3>
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+              <h3 class="font-display font-semibold text-lg text-primary">
+                Bachelor of Science, Electrical Engineering and Computer Science
+              </h3>
+              <span class="badge badge-outline font-display text-xs">May 2009</span>
+            </div>
             <p class="text-secondary font-medium">University of California, Berkeley</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Licenses & Certificates -->
+      <section>
+        <h2 class="text-2xl font-display font-bold text-secondary mb-6 flex items-center gap-2">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+          </svg>
+          Licenses & Certificates
+        </h2>
+        
+        <div class="space-y-4">
+          <div class="card bg-base-200 border border-primary/10">
+            <div class="card-body">
+              <div class="flex flex-wrap items-start justify-between gap-2 mb-1">
+                <h3 class="font-display font-semibold text-lg text-primary">
+                  Leading Complex Projects
+                </h3>
+                <span class="badge badge-outline font-display text-xs">April 2025</span>
+              </div>
+              <p class="text-secondary font-medium mb-2">UC Berkeley Executive Education</p>
+              <p class="text-base-content/70 text-sm mb-3">
+                Apply tools, frameworks, and strategies to manage traditional and complex projects. 
+                Evaluate and monitor performance in complex projects to achieve business objectives. 
+                Leverage adaptive leadership in complex projects to drive innovation.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-3">
+                <span class="badge badge-sm bg-base-300 border-primary/20">Understanding Complexities</span>
+                <span class="badge badge-sm bg-base-300 border-primary/20">Risk Management</span>
+                <span class="badge badge-sm bg-base-300 border-primary/20">Navigating Power</span>
+                <span class="badge badge-sm bg-base-300 border-primary/20">Adaptive Intelligence</span>
+                <span class="badge badge-sm bg-base-300 border-primary/20">Social Intelligence</span>
+              </div>
+              <a 
+                href="https://certificates.emeritus.org/9d3ff7d1-5e04-4530-8c0d-88b9e578dd7e" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                View Certificate
+              </a>
+            </div>
           </div>
         </div>
       </section>
