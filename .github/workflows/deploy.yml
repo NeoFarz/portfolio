@@ -20,13 +20,13 @@ concurrency:
 env:
   BUILD_PATH: "."
   # Set to 'true' to enable LaTeX CV compilation
-  BUILD_CV: 'false'
+  BUILD_CV: 'true'
   # UPDATE THIS: Your LaTeX CV repository
-  CV_REPO: "neofarz/cv"
+  CV_REPO: "alpha.doingit4.science/neofarz/cv.git"
   # UPDATE THIS: Path to main .tex file in the CV repo
-  CV_TEX_FILE: "cv.tex"
+  CV_TEX_FILE: "CV.tex"
   # Output filename for the compiled PDF
-  CV_OUTPUT: "cv.pdf"
+  CV_OUTPUT: "CV.pdf"
 
 jobs:
   build:
@@ -36,14 +36,19 @@ jobs:
       - name: Checkout portfolio
         uses: actions/checkout@v4
 
-      - name: Checkout CV repository
+      # - name: Checkout CV repository
+      #   if: env.BUILD_CV == 'true'
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: ${{ env.CV_REPO }}
+      #     path: cv-source
+      #     # If your CV repo is private, add a token:
+      #     # token: ${{ secrets.CV_REPO_TOKEN }}
+      
+      - name: Clone CV repository
         if: env.BUILD_CV == 'true'
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.CV_REPO }}
-          path: cv-source
-          # If your CV repo is private, add a token:
-          # token: ${{ secrets.CV_REPO_TOKEN }}
+        run: |
+          git clone https://neofarz:${{ secrets.CV_REPO_TOKEN }}@${{ env.CV_REPO }} cv-source
 
       - name: Compile LaTeX CV
         if: env.BUILD_CV == 'true'
