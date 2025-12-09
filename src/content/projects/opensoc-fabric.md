@@ -3,8 +3,9 @@ title: "OpenSoC Fabric"
 summary: "A parameterizable and powerful on-chip network generator for evaluating future high performance computing architectures based on SoC technology."
 tags: ["Chisel", "Scala", "Network-on-Chip", "HPC", "FPGA"]
 featured: true
-order: 90
 github: "https://github.com/LBL-CoDEx/OpenSoCFabric"
+paper: "https://doi.org/10.1109/ISPASS.2016.7482094"
+order: 90
 date: "2014–2018"
 ---
 

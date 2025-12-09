@@ -11,6 +11,7 @@ const projects = defineCollection({
     order: z.number().optional().default(0),
     github: z.string().optional(),
     demo: z.string().optional(),
+    paper: z.string().optional(),
     date: z.string().optional(),
   }),
 });
