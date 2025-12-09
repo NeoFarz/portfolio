@@ -26,7 +26,7 @@ env:
   # UPDATE THIS: Path to main .tex file in the CV repo
   CV_TEX_FILE: "CV.tex"
   # Output filename for the compiled PDF
-  CV_OUTPUT: "CV.pdf"
+  CV_OUTPUT: "Farzad_Fatollahi-Fard_CV.pdf"
 
 jobs:
   build:
@@ -48,7 +48,7 @@ jobs:
       - name: Clone CV repository
         if: env.BUILD_CV == 'true'
         run: |
-          git clone https://neofarz:${{ secrets.CV_REPO_TOKEN }}@${{ env.CV_REPO }} cv-source
+          git clone https://${{ secrets.CV_REPO_USER }}:${{ secrets.CV_REPO_TOKEN }}@${{ env.CV_REPO }} cv-source
 
       - name: Compile LaTeX CV
         if: env.BUILD_CV == 'true'
